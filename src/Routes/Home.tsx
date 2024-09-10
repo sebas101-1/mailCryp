@@ -1,29 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-class Email {
-  Subject: string;
-  Sender: string;
-  Body: File;
-
-  constructor(Subject: string, Sender: string, Body: File) {
-    this.Subject = Subject;
-    this.Sender = Sender;
-    this.Body = Body;
-  }
-
-  get mailSubject() {
-    return this.Subject;
-  }
-
-  get mailSender() {
-    return this.Sender;
-  }
-
-  get mailFile() {
-    return this.Body;
-  }
-}
-
+import { useNavigate } from 'react-router-dom'
+import Email from "../Classes/emailClass"
 const Home: React.FC = () => {
   const [listOfMail, setListOfMail] = useState<Email[]>([]);
   const [listOfMailSpam, setListOfMailSpam] = useState<Email[]>([]);
@@ -41,22 +18,22 @@ const Home: React.FC = () => {
     const testingFile = new File([testEmail], "Testing.eml"); // Assuming Testing is properly imported as a file content
 
     setListOfMailImportant([
-      new Email("Testing Important", "example@ex.com", new File([''], "testing.txt")),
-      new Email("Testing With the .eml", "example@ex.com", testingFile),
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt"))
+      new Email( new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt"))
     ]);
     
 
     setListOfMailSpam([
-      new Email("Testing Spam", "example@ex.com", new File([''], "testing.txt")),
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt")),
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt"))
+      new Email(new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt"))
     ]);
 
     setListOfMail([
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt")),
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt")),
-      new Email("Testing", "example@ex.com", new File([''], "testing.txt"))
+      new Email(new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt")),
+      new Email(new File([''], "testing.txt"))
     ]);
   }, []);
 
@@ -74,7 +51,7 @@ const Home: React.FC = () => {
   };
 
   const handleEmailClick = (email: Email) => {
-    navigate(`/email/${encodeURIComponent(email.mailSubject)}/${encodeURIComponent(email.mailSender)}/${encodeURIComponent("../assets/Testing.eml")}`);
+    navigate(`/email/${encodeURIComponent(email.mailSubject)}`);
   };
 
   return (
