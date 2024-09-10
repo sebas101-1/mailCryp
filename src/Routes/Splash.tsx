@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Link } from 'react-router-dom'
 
 function Splash() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -29,12 +27,7 @@ function Splash() {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600"
-          >
-            Login
-          </button>
+          <Link className='w-full py-2 self-center transition-all px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600' to={'/Home'}>Login</Link>
         </form>
       </div>
     </div> 
