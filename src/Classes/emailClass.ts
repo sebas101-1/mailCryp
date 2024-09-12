@@ -1,63 +1,81 @@
-const EmlParser = require('eml-parser');
-const fs = require('fs');
-
 class Email {
   Subject: string;
   Sender: string;
-  path: string;
-  emailFile: any;
-  Body: string | undefined; // Change HTMLElement to string, as it represents HTML
+  pathToEmail: string;
+  emailFile: string | Uint8Array; // Define emailFile type to be string or byte array
+  Body: string | undefined;
 
   constructor(Path: string) {
-    this.Subject = "placeHolder";
-    this.Sender = "placeHolder";
-    this.path = Path;
+    this.Subject = "Error: Email Failed to Load";
+    this.Sender = ":(";
+    this.pathToEmail = Path;
     this.Body = undefined;
+    this.emailFile = ''; // Initialize as empty string or buffer
   }
 
-  // Return a promise to handle asynchronous setup
-  setup(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.emailFile = fs.createReadStream(this.path); // Use this.path instead of hardcoding 'test.eml'
+  async setup(): Promise<void> {
+    try {
+      const response = await fetch(this.pathToEmail);
+      if (!response.ok) {
+        throw new Error('Failed to fetch email');
+      }
 
-      let parser = new EmlParser(this.emailFile);
+      const rawEmail = await response.text();  
+      const lines = rawEmail.split(/\r?\n/);
 
-      // Parse email body
-      parser.getEmailBodyHtml()
-        .then((htmlString: string) => {
-          this.Body = htmlString; // Store the parsed HTML in Body
-        })
-        .catch((err: any) => {
-          console.log('Failed to parse email body:', err);
-          reject(err);
-        });
+      let isInHeaders = true;
+      let isInBody = false;
+      let boundary = '';
+      let currentBody = '';
+      let contentType = '';
 
-      // Parse email headers
-      parser.getEmailHeaders()
-        .then((headers: any) => {
-          this.Subject = headers.subject || "No Subject"; // Update Subject from headers
-          this.Sender = headers.from ? headers.from[0].address : "Unknown Sender"; // Update Sender from headers
-          resolve(); // Resolve after parsing is done
-        })
-        .catch((err: any) => {
-          console.log('Failed to parse email headers:', err);
-          reject(err);
-        });
-    });
+      lines.forEach((line) => {
+        // Extract headers
+        if (isInHeaders) {
+          if (line.startsWith('Subject: ')) {
+            this.Subject = line.slice(9).trim();
+          } else if (line.startsWith('From: ')) {
+            this.Sender = line.slice(6).trim();
+          } else if (line.startsWith('Content-Type: multipart/alternative; boundary=')) {
+            boundary = line.match(/boundary="(.+?)"/)?.[1] || '';
+          }
+
+          // End of headers
+          if (line.trim() === '') {
+            isInHeaders = false;
+            isInBody = true;
+          }
+        }
+
+        // Body processing based on the boundary and content type
+        if (isInBody) {
+          if (line.includes(`--${boundary}`)) {
+            if (currentBody && contentType === 'text/html') {
+              this.Body = currentBody.trim();  // Capture the HTML body
+            }
+            currentBody = ''; // Reset body content for the next part
+            contentType = ''; // Reset content type
+          } else if (line.startsWith('Content-Type:')) {
+            contentType = line.match(/Content-Type:\s*(.+?);/)?.[1] || '';
+          } else {
+            // Accumulate the body content
+            if (contentType === 'text/html') {
+              currentBody += line + '\n';
+            }
+          }
+        }
+      });
+
+      // In case the last part is the body we're interested in
+      if (currentBody && contentType === 'text/html') {
+        this.Body = currentBody.trim();
+      }
+    } catch (error) {
+      console.error("Error while fetching or parsing the email:", error);
+    }
   }
 
-  // Getter for Subject
-  get mailSubject() {
-    return this.Subject;
-  }
-
-  // Getter for Sender
-  get mailSender() {
-    return this.Sender;
-  }
-
-  // Getter for Body (HTML content)
-  get mailBody() {
+  get html(): string | undefined {
     return this.Body;
   }
 }

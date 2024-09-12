@@ -1,40 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
-import Email from "../Classes/emailClass"
+import { useNavigate } from 'react-router-dom';
+import Email from "../Classes/emailClass";
+
 const Home: React.FC = () => {
   const [listOfMail, setListOfMail] = useState<Email[]>([]);
   const [listOfMailSpam, setListOfMailSpam] = useState<Email[]>([]);
   const [listOfMailImportant, setListOfMailImportant] = useState<Email[]>([]);
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [offset, setOffset] = useState('ml-[4.166666666666667%]');
-  const [testEmail, setTestEmail] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/testing.eml')
-      .then((response) => response.text())
-      .then((data) => setTestEmail(data));
+    const testingFile = "../assets/Testing.eml";
 
-    const testingFile = new File([testEmail], "Testing.eml"); // Assuming Testing is properly imported as a file content
+    const primaryEmails = [
+      new Email(testingFile),
+    ];
 
-    setListOfMailImportant([
-      new Email( new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt"))
-    ]);
-    
+    const spamEmails:Email[] = [
+    ];
 
-    setListOfMailSpam([
-      new Email(new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt"))
-    ]);
+    const importantEmails:Email[] = [
+    ];
 
-    setListOfMail([
-      new Email(new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt")),
-      new Email(new File([''], "testing.txt"))
-    ]);
+    // Wait for all email setups to complete
+    Promise.all([
+      ...primaryEmails.map((email) => email.setup()),
+      ...spamEmails.map((email) => email.setup()),
+      ...importantEmails.map((email) => email.setup()),
+    ]).then(() => {
+      setListOfMail(primaryEmails);
+      setListOfMailSpam(spamEmails);
+      setListOfMailImportant(importantEmails);
+      console.log("setup")
+      console.log(primaryEmails[0].Sender + " sender")
+    }).catch((err) => {
+      console.error("Failed to set up emails", err);
+    });
+
   }, []);
 
   const tabUnderline = (tab: number) => {
@@ -51,7 +54,7 @@ const Home: React.FC = () => {
   };
 
   const handleEmailClick = (email: Email) => {
-    navigate(`/email/${encodeURIComponent(email.mailSubject)}`);
+    navigate(`/email/${encodeURIComponent(email.pathToEmail)}`);
   };
 
   return (
@@ -84,8 +87,8 @@ const Home: React.FC = () => {
             key={index}
             onClick={() => handleEmailClick(email)}
           >
-            <p className='ml-8 font-bold mr-8'>{email.mailSender}</p>
-            <p>{email.mailSubject}</p>
+            <p className='ml-8 font-bold mr-8'>{email.Sender}</p>
+            <p>{email.Subject}</p>
           </div>
         ))}
         {currentTab === 1 && listOfMailSpam.map((email, index) => (
@@ -94,8 +97,8 @@ const Home: React.FC = () => {
             key={index}
             onClick={() => handleEmailClick(email)}
           >
-            <p className='ml-8 font-bold mr-8'>{email.mailSender}</p>
-            <p>{email.mailSubject}</p>
+            <p className='ml-8 font-bold mr-8'>{email.Sender}</p>
+            <p>{email.Subject}</p>
           </div>
         ))}
         {currentTab === 2 && listOfMailImportant.map((email, index) => (
@@ -104,8 +107,8 @@ const Home: React.FC = () => {
             key={index}
             onClick={() => handleEmailClick(email)}
           >
-            <p className='ml-8 font-bold mr-8'>{email.mailSender}</p>
-            <p>{email.mailSubject}</p>
+            <p className='ml-8 font-bold mr-8'>{email.Sender}</p>
+            <p>{email.Subject}</p>
           </div>
         ))}
       </div>
