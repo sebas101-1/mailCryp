@@ -1,45 +1,41 @@
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 function CreateAccount() {
-  // Use state to track form data
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    retypePassword: ''
-  });
-
-  const [error, setError] = useState('Welcome To MailCryp✉️'); // State to hold error messages
+  const [error, setError] = useState('Welcome To MailCryp✉️');
   const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Update state with form values
-    setFormData({ ...formData, [e.target.id]: e.target.value });
+  const [formData, setFormData] = useState({username: "",password: "",retypePassword:""});
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target;
+    console.log("change value " + value + " at name: "+ id + ": ");
+    setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
-
+  
   const handleSubmit = (event: React.FormEvent) => {
-    // Prevent the default form submission
-    console.log("signing in")
     event.preventDefault();
-
+    const username = formData.username;
+    const password = formData.password;
+    const retypePassword = formData.retypePassword;
+    console.log(formData)
     // Check if passwords match
-    if (formData.password !== formData.retypePassword) {
+    if (password !== retypePassword && password !== "") {
       setError("Passwords do not match!");
+      console.log(password + " :password" + retypePassword + " :password")
       return;
     }
 
     // POST form data to the server
     axios
-      .post('http://localhost:3000/login', formData)
+      .post('http://127.0.0.1:3000/create', {username: username,password: password })
       .then((response) => {
-        // Optionally reset the form here
-        setFormData({ email: '', password: '', retypePassword: '' });
-        navigate('/');
+        // Optionally clear the form inputs
+        console.log(response)
+        navigate('/home');
       })
       .catch((error) => {
         console.error('Error creating account:', error);
-        setError('Error creating account. Please try again.'); // Set error message for user
+        setError('Error creating account: ' + error);
       });
   };
 
@@ -50,36 +46,36 @@ function CreateAccount() {
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Create Account</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email*</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Username</label>
               <input
-                type="text" 
-                id="email"
+                type="text"
+                id="username"
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:border-black"
                 required
-                value={formData.email}
                 onChange={handleChange}
+                value={formData.username}
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password*</label>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
                 type="password"
                 id="password"
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 required
-                value={formData.password}
                 onChange={handleChange}
+                value={formData.password}
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="retypePassword" className="block text-sm font-medium text-gray-700">Retype Password*</label>
+              <label htmlFor="retypePassword" className="block text-sm font-medium text-gray-700">Retype Password</label>
               <input
                 type="password"
                 id="retypePassword"
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 required
-                value={formData.retypePassword}
                 onChange={handleChange}
+                value={formData.retypePassword}
               />
             </div>
             <button
@@ -94,11 +90,9 @@ function CreateAccount() {
             >
               I already have an account
             </Link>
-            <p className="text-center mt-2">* required</p>
             <p className="text-center mt-2">{error}</p>
           </form>
         </div>
-        
       </div>
     </>
   );
