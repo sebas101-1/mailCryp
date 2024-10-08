@@ -1,8 +1,15 @@
+import axios from 'axios'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Splash() {
-
+  const handleSubmit = (event: FormData) => {
+      const navagate = useNavigate();
+      axios.post('/login', {event})
+        .then(response =>
+          navagate('/')
+        )
+  }
   return (
     <>
       <div className=" bg-gray-600 flex items-center justify-center min-h-screen">
@@ -26,8 +33,10 @@ function Splash() {
               className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
               required
             />
+
           </div>
-          <Link className='w-full py-2 self-center transition-all px-4 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600' to={'/Home'}>Login</Link>
+          <button type='submit' className='w-full py-2 self-center block transition-all px-4 text-center border-2 border-white hover:border-black bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600'>Login</button>
+          <Link className='w-full block mt-2 py-2 self-center transition-all px-4 text-center bg-blue-500 text-white border-white font-bold rounded-lg border-2 hover:border-black hover:bg-blue-600' to={'/CreateAccount'}>Create Account</Link>
         </form>
       </div>
     </div> 

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Splash from "./Routes/Splash"
+import CreateAccount from "./Routes/CreateAccount"
 import Home from "./Routes/Home"
 import EmailRead from "./Routes/EmailRead"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/email/:subject/:sender/:body",
     element: <EmailRead/>
+  },
+  {
+    path: "/CreateAccount",
+    element: <CreateAccount/>
   }
 ]);
 
