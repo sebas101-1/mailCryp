@@ -27,7 +27,14 @@ function CreateAccount() {
 
     // POST form data to the server
     axios
-      .post('http://127.0.0.1:3000/create', {username: username,password: password })
+      .post('http://127.0.0.1:3000/create', 
+        {username: username,
+          password: password 
+        },
+        {headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }}
+      )
       .then((response) => {
         // Optionally clear the form inputs
         console.log(response)
