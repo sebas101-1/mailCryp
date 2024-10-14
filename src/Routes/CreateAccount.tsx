@@ -21,7 +21,6 @@ function CreateAccount() {
     // Check if passwords match
     if (password !== retypePassword && password !== "") {
       setError("Passwords do not match!");
-      console.log(password + " :password" + retypePassword + " :password")
       return;
     }
 
@@ -42,7 +41,8 @@ function CreateAccount() {
       })
       .catch((error) => {
         console.error('Error creating account:', error);
-        setError('Error creating account: ' + error);
+        setError('Username is already Taken');
+        navigate('/createAccount')
       });
   };
 

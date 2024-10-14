@@ -8,7 +8,6 @@ function CreateAccount() {
   const [formData, setFormData] = useState({username: "",password: ""});
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
-    console.log("change value " + value + " at name: "+ id + ": ");
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
   };
   
@@ -16,11 +15,9 @@ function CreateAccount() {
     event.preventDefault();
     const username = formData.username;
     const password = formData.password;
-    console.log(formData)
-
     // POST form data to the server
     axios
-      .post('http://127.0.0.1:3000/login', 
+      .post('http://localhost:3000/login', 
         {username: username,
           password: password 
         },
@@ -31,11 +28,17 @@ function CreateAccount() {
       .then((response) => {
         // Optionally clear the form inputs
         console.log(response)
-        navigate('/home');
+        if(response.data.success){
+          navigate('/home');
+        }  
+        else{
+          setError(response.data.message);
+        }
+        
       })
       .catch((error) => {
-        console.error('Error creating account:', error);  
-        setError('Username or password is incorrect');
+        console.error('Error Login in', error);  
+        setError("username or password is wrong");
       });
   };
 
