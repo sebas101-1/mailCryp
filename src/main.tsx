@@ -5,6 +5,7 @@ import Splash from "./Routes/Splash"
 import CreateAccount from "./Routes/CreateAccount"
 import Home from "./Routes/Home"
 import EmailRead from "./Routes/EmailRead"
+import NotFound from "./Routes/NotFound"
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/CreateAccount",
     element: <CreateAccount/>
+  },
+  {
+    path: "*",
+    element: <NotFound/>
   }
 ]);
 

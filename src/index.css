@@ -1,3 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.scrolling-container {
+    display: flex;
+    overflow: hidden;
+    height: 16.7vh;
+    align-items: center;
+    border-top: 5px solid black;
+    white-space: nowrap;
+    position: relative;
+}
+
+.scrolling-text {
+    display: inline-block;
+    animation: scroll 10s linear infinite; /* Increase animation duration for smoothness */
+    font-size: 30vh;
+    font-family: 'Hubot Sans', 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    white-space: nowrap;
+    line-height: 1; /* Ensure no extra space around the text */
+    /* Tailwind classes for utility */
+
+}
+.shadowbox{
+    box-shadow: 5px 5px black;
+}
+.shadowbox:hover{
+    box-shadow: 15px 15px 1px black;
+    transform: scale(1.07);
+}
+input:focus {
+    outline: none;
+}
+.gradiantBg {
+        background: linear-gradient(229deg, #11ebb3, #2b1850,black);
+        background-size: 400% 400%;
+    
+        -webkit-animation: GradiantScroll 20s ease infinite;
+        -moz-animation: GradiantScroll 20s ease infinite;
+        animation: GradiantScroll 20s ease infinite;
+    }
+    
+    @-webkit-keyframes GradiantScroll {
+        0%{background-position:0% 5%}
+        50%{background-position:100% 96%}
+        100%{background-position:0% 5%}
+    }
+    @-moz-keyframes GradiantScroll {
+        0%{background-position:0% 5%}
+        50%{background-position:100% 96%}
+        100%{background-position:0% 5%}
+    }
+    @keyframes GradiantScroll {
+        0%{background-position:0% 5%}
+        50%{background-position:100% 96%}
+        100%{background-position:0% 5%}
+    }
+/* Keyframes for a seamless scrolling effect */
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

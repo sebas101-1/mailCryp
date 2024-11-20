@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import * as path from 'path';
 import Email from "../Classes/emailClass"; // Assuming you have this class for parsing
 
 export default function EmailRead() {
@@ -37,7 +36,7 @@ export default function EmailRead() {
 
   return (
     <div className='bg-slate-500 flex fadeIn justify-center items-center h-screen'>
-      <div className='trigger bg-gray-200 rounded-2xl w-4/6 h-[90vh]'>
+      <div className='trigger bg-gray-200 rounded-2xl w-full '>
         <h1 className='text-xl m-10 font-bold'>{email?.Subject}</h1>
         <div className='mt-4'>
           <div className='flex mb-10'>
