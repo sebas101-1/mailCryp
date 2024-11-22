@@ -12,8 +12,8 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const testingFile = "../assets/Testing.eml";
-
-    const primaryEmails = [new Email(testingFile)];
+    
+    const primaryEmails = [new Email(testingFile),new Email(testingFile),new Email(testingFile)];
     const spamEmails: Email[] = [];
     const importantEmails: Email[] = [];
 
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
           {currentTab === 0 &&
             listOfMail.map((email, index) => (
               <div
-                className="border-b-2 ml-0 m-2 hover:bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
+                className="border-b-2 ml-0 p-2 hover:bgGradiant cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
                 key={index}
                 onClick={() => handleEmailClick(email)}
               >

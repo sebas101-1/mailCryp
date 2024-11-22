@@ -6,10 +6,10 @@ class Email {
   Body: string | undefined;
 
   constructor(Path: string) {
-    this.Subject = "Error: Email Failed to Load";
-    this.Sender = ":(";
+    this.Subject = "Email Failed to Load";
+    this.Sender = "Sebastien@Admin";
     this.pathToEmail = Path;
-    this.Body = undefined;
+    this.Body = '<p>Failed To Load</p>';
     this.emailFile = ''; // Initialize as empty string or buffer
   }
 
@@ -17,7 +17,13 @@ class Email {
     try {
       const response = await fetch(this.pathToEmail);
       if (!response.ok) {
+        this.Subject = '!Response Worked'
         throw new Error('Failed to fetch email');
+        
+      }
+      else{
+        console.log('Response Was Okay')
+        this.Subject = 'Response Worked'
       }
 
       const rawEmail = await response.text();  
@@ -45,13 +51,14 @@ class Email {
             isInHeaders = false;
             isInBody = true;
           }
+          console.log('isinHeaders='+isInHeaders,' isInBody='+isInBody)
         }
 
         // Body processing based on the boundary and content type
         if (isInBody) {
           if (line.includes(`--${boundary}`)) {
             if (currentBody && contentType === 'text/html') {
-              this.Body = currentBody.trim();  // Capture the HTML body
+              this.Body = currentBody.trim();
             }
             currentBody = ''; // Reset body content for the next part
             contentType = ''; // Reset content type
@@ -70,6 +77,7 @@ class Email {
       if (currentBody && contentType === 'text/html') {
         this.Body = currentBody.trim();
       }
+      console.log("current Body Trim iS \n" + currentBody.trim)
     } catch (error) {
       console.error("Error while fetching or parsing the email:", error);
     }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Email from "../Classes/emailClass"; // Assuming you have this class for parsing
+import Sidebar from '../hero/Sidebar';
 
 export default function EmailRead() {
   // Expect emailPath to be a string from useParams
@@ -9,21 +10,17 @@ export default function EmailRead() {
   // Correct the useState declaration for the Email class
   const [email, setEmail] = useState<Email | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true); // Loading state
-
+  const back = 'https://cdn-icons-png.flaticon.com/512/130/130882.png'
   // Fetch and parse the .eml file
   useEffect(() => {
     const fetchAndParseEmail = async () => {
       try {
         if (emailPath) {
-          // Fetch the .eml file from the given path
-          
-          // Assuming Email is a class to parse email content, instantiate it
-          const parsedEmail = new Email(emailPath); // Adjust this to match your class logic
+          const parsedEmail = new Email(emailPath);
           parsedEmail.setup();
-          // Now set the parsed email in state
           setEmail(parsedEmail);
-          // Set email body to either HTML or plain text
           setIsLoading(false); // Stop loading after fetching
+          console.log("loaded Email")
         }
       } catch (error) {
         console.error('Failed to fetch or parse the email:', error);
@@ -32,15 +29,19 @@ export default function EmailRead() {
     };
 
     fetchAndParseEmail();
-  }, [emailPath]); // Dependency on emailPath
+  }, [emailPath]);
 
   return (
-    <div className='bg-slate-500 flex fadeIn justify-center items-center h-screen'>
-      <div className='trigger bg-gray-200 rounded-2xl w-full '>
+    <div className='gradiantBg flex justify-center items-center h-screen'>
+
+      <div className='bg-gray-200 shadow-2xl h-[90vh] w-[90vw] '>
+        <Link to={'/home'}>
+          <img className='h-[2rem] transition-all hover:bg-gray-300  m-2 rounded-full border-2 p-2' src={back}/>
+        </Link>
         <h1 className='text-xl m-10 font-bold'>{email?.Subject}</h1>
         <div className='mt-4'>
           <div className='flex mb-10'>
-            <p className='ml-10 font-bold'>From: {email?.Sender}</p>
+            <p className='ml-10 font-bold'>{email?.Sender}</p>
           </div>
           <div className='text-center justify-normal'>
             {isLoading ? (

@@ -8,8 +8,8 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
     const spamIcon = "https://static.thenounproject.com/png/3951320-512.png";
     const importantIcon = "https://www.svgrepo.com/show/309695/important.svg";
     const toggleIcon = isMinimized
-        ? "https://cdn-icons-png.flaticon.com/512/130/130882.png" // Expand icon
-        : "https://cdn-icons-png.flaticon.com/512/130/130884.png"; // Minimize icon
+        ? "https://cdn-icons-png.flaticon.com/512/130/130884.png" // Expand icon
+        : "https://cdn-icons-png.flaticon.com/512/130/130882.png"; // Minimize icon
 
     const isTabHovered = (tabIndex: number) => hoveredTab === tabIndex || currentTab === tabIndex;
 
@@ -17,7 +17,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
         <div
             className={`h-full bg-gray-200 flex flex-col items-start p-4 transition-all`}
             style={{
-                width: isMinimized ? '100px' : '200px',
+                width: isMinimized ? '87px' : '140px',
                 transition: 'width 0.3s ease',
             }}
         >
@@ -26,7 +26,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                 onClick={() => setIsMinimized(!isMinimized)}
                 className="mb-4 p-2 self-end hover:bg-gray-300 rounded-full transition-all"
             >
-                <img className="h-[1.2rem]" src={toggleIcon} alt="Toggle Sidebar" />
+                <img className="h-[0.8rem]" src={toggleIcon} alt="Toggle Sidebar" />
             </button>
 
             {/* Tab 0 */}
@@ -48,7 +48,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                         style={{
                             maxWidth: isTabHovered(0)&&!isMinimized ? '100px' : '0',
                             opacity: isTabHovered(0)&&!isMinimized ? '100%' : '0',
-                            fontSize: isTabHovered(0)&&!isMinimized ? '1rem' : '0rem',
+                            fontSize: isTabHovered(0)&&!isMinimized ? '0.8rem' : '0rem',
                         }}
                     >
                         Primary
@@ -102,7 +102,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                         style={{
                             maxWidth: isTabHovered(2)&&!isMinimized ? '100px' : '0',
                             opacity: isTabHovered(2)&&!isMinimized ? '100%' : '0',
-                            fontSize: isTabHovered(2)&&!isMinimized ? '0.8rem' : '0rem',
+                            fontSize: isTabHovered(2)&&!isMinimized ? '0.5rem' : '0rem',
                         }}
                     >
                         Important

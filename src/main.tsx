@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/email/:subject/:sender/:body",
+    path: "/email/:emailPath",
     element: <EmailRead/>
   },
   {
