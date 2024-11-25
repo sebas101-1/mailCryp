@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import notFound from "../assets/200.webp";
 
 export default function NotFound() {
@@ -9,6 +10,7 @@ export default function NotFound() {
 
             {[...Array(6)].map((_, index) => (
                 <div key={index} className="scrolling-container">
+                    <Link to='/'>
                     {delay = Math.random() * 40}
                     {duration =Math.random() * 10 + 10}
                     <p
@@ -29,6 +31,7 @@ export default function NotFound() {
                     >
                         404 Not Found
                     </p>
+                    </Link>
                 </div>
             ))}
         </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import mailIcon from '../assets/email.svg';
-
+import send from '../assets/send.svg'
+import { Link } from 'react-router-dom';
 const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number; open: string }> = ({ onTabChange, currentTab, open }) => {
     const [hoveredTab, setHoveredTab] = useState<number | null>(null);
     const [isMinimized, setIsMinimized] = useState(false);
@@ -109,6 +110,31 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                     </p>
                 )}
             </button>
+            <Link
+                onMouseEnter={() => setHoveredTab(3)}
+                onMouseLeave={() => setHoveredTab(null)}
+                className={`p-4 flex mb-4 items-center rounded-full transition-all ${
+                    isTabHovered(3) ? 'bg-gray-300' : 'hover:bg-gray-300'
+                }`}
+                style={{
+                    width: isMinimized ? '100%' : 'auto',
+                }}
+                to='/send'
+            >
+                <img className="h-[1.5rem]" src={send} alt="Important Icon" />
+                {!isMinimized && (
+                    <p
+                        className="ml-2 overflow-hidden transition-all duration-300 ease-in-out"
+                        style={{
+                            maxWidth: isTabHovered(3)&&!isMinimized ? '100px' : '0',
+                            opacity: isTabHovered(3)&&!isMinimized ? '100%' : '0',
+                            fontSize: isTabHovered(3)&&!isMinimized ? '0.8rem' : '0rem',
+                        }}
+                    >
+                        Send
+                    </p>
+                )}
+            </Link>
         </div>
     );
 };
