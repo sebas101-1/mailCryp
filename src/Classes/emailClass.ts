@@ -12,7 +12,12 @@ class Email {
     this.Body = '<p>Failed To Load</p>';
     this.emailFile = ''; // Initialize as empty string or buffer
   }
-
+  setSubject(subject:string){
+    this.Subject = subject
+  }
+  setBody(body:string){
+    this.Body = body
+  }
   async setup(): Promise<void> {
     try {
       const response = await fetch(this.pathToEmail);
