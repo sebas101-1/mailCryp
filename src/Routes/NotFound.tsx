@@ -1,4 +1,4 @@
-import notFound from "../assets/200.webp";
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
     let delay;
@@ -11,24 +11,26 @@ export default function NotFound() {
                 <div key={index} className="scrolling-container">
                     {delay = Math.random() * 40}
                     {duration =Math.random() * 10 + 10}
-                    <p
-                        style={{
-                            animationDelay: `${delay}ms`,
-                            animationDuration: `${duration}s`,
-                        }}
-                        className="scrolling-text"
-                    >
-                        404 Not Found
-                    </p>
-                    <p
-                        style={{
-                            animationDelay: `${delay}ms`,
-                            animationDuration: `${duration}s`,
-                        }}
-                        className="scrolling-text"
-                    >
-                        404 Not Found
-                    </p>
+                    <Link to={'/'}>
+                        <p
+                            style={{
+                                animationDelay: `${delay}ms`,
+                                animationDuration: `${duration}s`,
+                            }}
+                            className="scrolling-text"
+                        >
+                            404 Not Found
+                        </p>
+                        <p
+                            style={{
+                                animationDelay: `${delay}ms`,
+                                animationDuration: `${duration}s`,
+                            }}
+                            className="scrolling-text"
+                        >
+                            404 Not Found
+                        </p>
+                    </Link>
                 </div>
             ))}
         </div>

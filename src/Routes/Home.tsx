@@ -44,12 +44,12 @@ const Home: React.FC = () => {
       <Sidebar onTabChange={tabUnderline} currentTab={currentTab} open={sidebarOpen} />
 
       {/* Main Content */}
-      <div className="w-3/4 h-full flex flex-col">
-        <div className="flex-grow overflow-auto p-4">
+      <div className="w-full boatBackground shadow-2xl h-full flex flex-col">
+        <div className="flex-grow  overflow-auto p-4">
           {currentTab === 0 &&
             listOfMail.map((email, index) => (
               <div
-                className="border-b-2 ml-0 p-2 hover:bgGradiant cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
+                className="border-b-2 ml-0 p-2 hover:bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
                 key={index}
                 onClick={() => handleEmailClick(email)}
               >

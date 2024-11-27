@@ -54,7 +54,7 @@ function CreateAccount() {
               <input
                 type="text"
                 id="username"
-                className="mt-1 p-2 w-full border border-gray-300"
+                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-300"
                 required
                 onChange={handleChange}
                 value={formData.username}
@@ -66,7 +66,7 @@ function CreateAccount() {
               <input
                 type="password"
                 id="password"
-                className="mt-1 p-2 w-full border border-gray-300"
+                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-300"
                 required
                 onChange={handleChange}
                 value={formData.password}
@@ -74,7 +74,7 @@ function CreateAccount() {
             </div>
             <button
               type="submit"
-              className="w-full shadowbox block py-2 mb-4 self-center transition-all px-4 text-center bg-blue-500 text-white border-white font-bold hover:bg-blue-600"
+              className="w-full border-black shadowbox block py-2 mb-4 self-center transition-all px-4 text-center bg-blue-500 text-white font-bold hover:bg-blue-600"
             >
               Login
             </button>

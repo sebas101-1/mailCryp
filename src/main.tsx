@@ -6,6 +6,7 @@ import CreateAccount from "./Routes/CreateAccount"
 import Home from "./Routes/Home"
 import EmailRead from "./Routes/EmailRead"
 import NotFound from "./Routes/NotFound"
+import Send from "./Routes/Send";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound/>
+  },
+  {
+    path: "Send",
+    element: <Send/>
   }
 ]);
 

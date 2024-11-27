@@ -38,30 +38,57 @@ input:focus {
     outline: none;
 }
 .gradiantBg {
-        background: linear-gradient(229deg, #11ebb3, #2b1850,black);
-        background-size: 400% 400%;
+        /* background: linear-gradient(229deg, #11ebb3, #2b1850,black); */
+        background-image: url(https://cdn.pixabay.com/animation/2023/07/15/12/16/12-16-35-40_512.gif);
+        /* background-size: 400% 400%; */
     
-        -webkit-animation: GradiantScroll 20s ease infinite;
+        /* -webkit-animation: GradiantScroll 20s ease infinite;
         -moz-animation: GradiantScroll 20s ease infinite;
-        animation: GradiantScroll 20s ease infinite;
+        animation: GradiantScroll 20s ease infinite; */
     }
-    
-    @-webkit-keyframes GradiantScroll {
-        0%{background-position:0% 5%}
-        50%{background-position:100% 96%}
-        100%{background-position:0% 5%}
-    }
-    @-moz-keyframes GradiantScroll {
-        0%{background-position:0% 5%}
-        50%{background-position:100% 96%}
-        100%{background-position:0% 5%}
-    }
-    @keyframes GradiantScroll {
-        0%{background-position:0% 5%}
-        50%{background-position:100% 96%}
-        100%{background-position:0% 5%}
-    }
+.boatBackground{
+    background: linear-gradient(237deg, #46aa90, #ab98c4);
+    background-size: 400% 400%;
+
+    -webkit-animation: scroll-gradient 30s ease infinite;
+    -moz-animation: scroll-gradient 30s ease infinite;
+    animation: scroll-gradient 30s ease infinite;
+}
+
+
 /* Keyframes for a seamless scrolling effect */
+/* Parent container */
+.scrolling-gradient-border {
+    border: 1px solid rgb(209 213 219);
+    box-shadow: 0px 0px;
+}
+.scrolling-gradient-border:focus{
+    border-image: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000) 1;
+    animation: scroll-gradient 4s linear infinite;
+    border-radius: 10px;
+}
+.ql-container {
+    height: 100%; /* Matches parent height */
+    display: flex; /* Ensures proper layout */
+    flex-direction: column; /* Avoids overlapping */
+  }
+  
+.ql-editor {
+    flex: 1; /* Ensures content doesn't clip */
+    overflow-y: auto; /* Handles scrolling if content overflows */
+}
+  
+  
+  /* Gradient scrolling animation */
+@keyframes scroll-gradient {
+    0% {
+        border-image-source: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
+    }
+    100% {
+        border-image-source: linear-gradient(450deg, #ff0000, #00ff00, #0000ff, #ff0000);
+    }
+}
+  
 @keyframes scroll {
     0% {
         transform: translateX(0%);
@@ -69,4 +96,19 @@ input:focus {
     100% {
         transform: translateX(-100%);
     }
+}
+@-webkit-keyframes scroll-gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes scroll-gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes scroll-gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
