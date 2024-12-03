@@ -12,7 +12,6 @@ export default function NotFound() {
                     <Link to='/'>
                     {delay = Math.random() * 40}
                     {duration =Math.random() * 10 + 10}
-                    <Link to={'/'}>
                         <p
                             style={{
                                 animationDelay: `${delay}ms`,

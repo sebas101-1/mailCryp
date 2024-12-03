@@ -30,7 +30,7 @@ export default function Send() {
         <div className="flex">
           <input
             className="w-full text-2xl border-b-2 border-gray-300 p-8 text-center bg-gray-200 focus:outline-none"
-            defaultValue="Subject"
+            placeholder="Subject"
           />
         </div>
 
@@ -53,7 +53,7 @@ export default function Send() {
         </div>
 
         {/* Email Body */}
-        <div className="h-[40vh] m-8 border-2 bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="h-[40vh] m-8 scrolling-gradient-border bg-white rounded-lg shadow-sm overflow-hidden">
           <ReactQuill
             theme="snow"
             value={body}

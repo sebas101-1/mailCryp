@@ -60,7 +60,8 @@ export default function EmailRead() {
                   value={replyText}
                   onChange={setreplyText}
                   style={{
-                    height: reply? '20vh': 0
+                    height: reply? '20vh': 0,
+                    opacity: reply? '100%': 0
                   }}
                   className=' border-[1px] shadow-md border-gray-300 border-t-0 transition-all rounded-t-none m-8 mt-0 overflow-y-hidden bg-white rounded-lg'
                 />

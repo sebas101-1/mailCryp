@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, {useState } from 'react';
 import mailIcon from '../assets/email.svg'
 function CreateAccount() {
-  const [error, setError] = useState('Welcome To MailCryp✉️');
+  const [error, setError] = useState('Welcome Back✉️');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({username: "",password: ""});
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
