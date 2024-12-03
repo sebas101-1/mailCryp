@@ -9,7 +9,7 @@ export default function NotFound() {
 
             {[...Array(6)].map((_, index) => (
                 <div key={index} className="scrolling-container">
-                    <Link to='/'>
+                    <Link to={'/'}>
                     {delay = Math.random() * 40}
                     {duration =Math.random() * 10 + 10}
                         <p
