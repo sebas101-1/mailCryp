@@ -66,13 +66,13 @@ export default function Send() {
         <div className="flex justify-start m-4 items-center">
           <button
             onClick={() => console.log({ body, attachedFile })}
-            className="bg-blue-500 rounded-r-none text-white px-4 py-2 rounded-l shadow hover:bg-blue-600 border-gray-300 border-r-2 transition"
+            className="bg-blue-500 rounded-r-none text-white text-sm px-4 py-2 rounded-full hover:shadow-2xl shadow hover:bg-blue-600 border-gray-300 border-r-2 transition"
           >
             Send
           </button>
           <label
             htmlFor="files"
-            className="bg-blue-500 text-white px-4 py-2 rounded-r shadow hover:bg-blue-600 transition cursor-pointer"
+            className="bg-blue-500 text-sm text-white px-4 py-2 rounded-l-none rounded-full hover:shadow-2xl shadow hover:bg-blue-600 transition cursor-pointer"
           >
             Select File
           </label>

@@ -37,6 +37,9 @@
 input:focus {
     outline: none;
 }
+.buttonGradiant {
+    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+}
 .gradiantBg {
         /* background: linear-gradient(229deg, #11ebb3, #2b1850,black); */
         background-image: url(https://cdn.pixabay.com/animation/2023/07/15/12/16/12-16-35-40_512.gif);
