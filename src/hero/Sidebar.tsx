@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import mailIcon from '../assets/email.svg';
 import send from '../assets/send.svg'
 import { Link } from 'react-router-dom';
+import spam from '../assets/spam.svg'
+import important from '../assets/important.svg'
 const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number; open: string }> = ({ onTabChange, currentTab, open }) => {
     const [hoveredTab, setHoveredTab] = useState<number | null>(null);
     const [isMinimized, setIsMinimized] = useState(false);
-
-    const spamIcon = "https://static.thenounproject.com/png/3951320-512.png";
-    const importantIcon = "https://www.svgrepo.com/show/309695/important.svg";
     const toggleIcon = isMinimized
         ? "https://cdn-icons-png.flaticon.com/512/130/130884.png" // Expand icon
         : "https://cdn-icons-png.flaticon.com/512/130/130882.png"; // Minimize icon
@@ -69,7 +68,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                     width: isMinimized ? '100%' : 'auto',
                 }}
             >
-                <img className="h-[1.5rem]" src={spamIcon} alt="Spam Icon" />
+                <img className="h-[1.5rem]" src={spam} alt="Spam Icon" />
                 {!isMinimized && (
                     <p
                         className="ml-2 overflow-hidden transition-all duration-300 ease-in-out"
@@ -96,7 +95,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                     width: isMinimized ? '100%' : 'auto',
                 }}
             >
-                <img className="h-[1.5rem]" src={importantIcon} alt="Important Icon" />
+                <img className="h-[1.5rem]" src={important} alt="Important Icon" />
                 {!isMinimized && (
                     <p
                         className="ml-2 overflow-hidden transition-all duration-300 ease-in-out"
