@@ -47,7 +47,7 @@ export default function Send() {
             <p className="mr-2">CC:</p>
             <input
               className="bg-gray-200 w-full focus:outline-none"
-              placeholder="CC (optional)"
+              placeholder="Optional"
             />
           </div>
         </div>

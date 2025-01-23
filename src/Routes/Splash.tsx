@@ -45,7 +45,7 @@ function CreateAccount() {
 
   return (
     <>
-      <div className="gradiantBg flex  min-h-screen">
+      <div className="el flex  min-h-screen">
         <div className="w-full max-w-md p-8 items-center justify-center bg-white shadow-lg">
           <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Welcome</h2>
           <form onSubmit={handleSubmit}>
@@ -54,7 +54,7 @@ function CreateAccount() {
               <input
                 type="text"
                 id="username"
-                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-300"
+                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-500"
                 required
                 onChange={handleChange}
                 value={formData.username}
@@ -66,7 +66,7 @@ function CreateAccount() {
               <input
                 type="password"
                 id="password"
-                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-300"
+                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-500"
                 required
                 onChange={handleChange}
                 value={formData.password}
