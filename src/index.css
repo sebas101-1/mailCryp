@@ -61,8 +61,8 @@ input:focus {
         -moz-animation: GradiantScroll 20s ease infinite;
         animation: GradiantScroll 20s ease infinite; */
     }
-.boatBackground{
-    background: linear-gradient(237deg, #46aa90, #ab98c4);
+.homeBg{
+    background: linear-gradient(237deg, #0ad29d, #7b32db,rgb(214, 68, 87));
     background-size: 400% 400%;
 
     -webkit-animation: scroll-gradient 30s ease infinite;
@@ -110,10 +110,13 @@ background-color: #ffffff;
     border: 1px solid rgb(209 213 219);
     box-shadow: 0px 0px;
 }
+.border-left{
+    border-left: 1px solid rgb(209 213 219);
+}
 .strong-shadow{
     box-shadow: 0 0 20px 2px;
 }
-.scrolling-gradient-border:focus{
+.scrolling-gradient-border:hover{
     border-image: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000) 1;
     animation: scroll-gradient 4s linear infinite;
     border-radius: 10px;

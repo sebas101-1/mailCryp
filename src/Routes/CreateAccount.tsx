@@ -5,14 +5,13 @@ import React, { useRef, useState } from 'react';
 function CreateAccount() {
   const [error, setError] = useState('Welcome To MailCryp✉️');
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({username: "",password: "",retypePassword:""});
+  const [formData, setFormData] = useState({username: "",password: "",retypePassword:"",bDay:""});
   const [passwordLength, setPasswordLength] = useState(0);
   const [passwordsMatch, setPasswordsMatch] = useState(false);
   const[isVisibleRe, setIsVisibleRe] =  useState(false);
   const[isVisiblePass, setIsVisiblePass] = useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
-    console.log("is Visible Re",isVisibleRe);
     if(id == 'password'){
       setPasswordLength(value.length)
       setPasswordsMatch((formData.retypePassword == value));
@@ -30,7 +29,7 @@ function CreateAccount() {
     const username = formData.username;
     const password = formData.password;
     const retypePassword = formData.retypePassword;
-    console.log(formData)
+    const bDay = formData.bDay;
     // Check if passwords match
     if (password !== retypePassword) {
       setError("Passwords do not match!");
@@ -45,7 +44,8 @@ function CreateAccount() {
     axios
       .post('http://127.0.0.1:3000/create', 
         {username: username,
-          password: password 
+          password: password,
+          bDay: bDay
           
         },
         {headers: {
@@ -71,15 +71,19 @@ function CreateAccount() {
           <h2 className="text-2xl font-bold mb-6  text-center text-gray-900">Create Account</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
+              
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Username</label>
-              <input
-                type="text"
-                id="username"
-                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-500"
-                required
-                onChange={handleChange}
-                value={formData.username}
-              />
+              <div className='transition flex mb-1 mt-1 p-2 items-center scrolling-gradient-border w-full border border-gray-500 '>
+                <input
+                  type="text"
+                  id="username"
+                  className=" "
+                  required
+                  onChange={handleChange}
+                  value={formData.username}
+                />
+                <p className=' ml-auto justify-end'>@MailCryp.com</p>
+              </div>
             </div>
             <div className="">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
@@ -107,7 +111,7 @@ function CreateAccount() {
                 value={formData.retypePassword}
               />
             </div>
-            <div className={(isVisiblePass? "" : "invisible") +  "transition flex mb-1 mt-1 items-center space-x-2"}>
+            <div className={(isVisibleRe? "" : "invisible ") +  "transition flex mb-1 mt-1 items-center space-x-2"}>
                 <div className={((passwordsMatch)? "bggreen" : "bgred") +  " w-2 h-2 rounded-full" }></div>
                 <p className="text-xs">Passwords must match</p>
             </div>
@@ -115,11 +119,13 @@ function CreateAccount() {
               <label htmlFor="retypePassword" className="block text-sm font-medium text-gray-700">Date Of Birth</label>
               <input
                 type="date"
-                id="birthday"
+                id="bDay"
                 className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-500"
                 required
                 onChange={handleChange}
-                value={formData.retypePassword}
+                value={formData.bDay}
+                max="2025-01-24"
+                min="1908-05-23"
               />
             </div>
             <button

@@ -59,7 +59,7 @@ export default function EmailRead() {
             </svg>
           </div>
           <div className='w-full flex'>
-            <p className='ml-8 pb-2 border-b-2 border-gray-300 font-bold'>From {email?.Sender}</p>
+            <p className='ml-8 pb-2 border-b-2 border-gray-300 font-bold'>From: {email?.Sender}</p>
           </div>
           <div className={`border-[1px] shadow-md rounded-md bg-white m-8 mb-0  p-4 border-gray-300 h-full justify-normal ${reply ? "border-b-0 rounded-b-none" : ""}`}>
             {isLoading ? (

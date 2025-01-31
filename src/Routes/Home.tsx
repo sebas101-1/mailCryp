@@ -44,41 +44,43 @@ const Home: React.FC = () => {
       <Sidebar onTabChange={tabUnderline} currentTab={currentTab} open={sidebarOpen} />
 
       {/* Main Content */}
-      <div className="w-full boatBackground shadow-2xl h-full flex flex-col">
-        <div className="flex-grow  overflow-auto p-4">
-          {currentTab === 0 &&
-            listOfMail.map((email, index) => (
-              <div
-                className="border-b-2 ml-0 p-2 hover:bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
-                key={index}
-                onClick={() => handleEmailClick(email)}
-              >
-                <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                <p>{email.Subject}</p>
-              </div>
-            ))}
-          {currentTab === 1 &&
-            listOfMailSpam.map((email, index) => (
-              <div
-                className="border-b-2 ml-0 m-2 hover:bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
-                key={index}
-                onClick={() => handleEmailClick(email)}
-              >
-                <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                <p>{email.Subject}</p>
-              </div>
-            ))}
-          {currentTab === 2 &&
-            listOfMailImportant.map((email, index) => (
-              <div
-                className="border-b-2 ml-0 m-2 hover:bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
-                key={index}
-                onClick={() => handleEmailClick(email)}
-              >
-                <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                <p>{email.Subject}</p>
-              </div>
-            ))}
+      <div className="w-full homeBg shadow-2xl h-full flex flex-col">
+        <div className="flex-grow overflow-auto p-8">
+          <div className='bg-gray-100 border shadow-2xl border-gray-300'>
+            {currentTab === 0 &&
+              listOfMail.map((email, index) => (
+                <div
+                  className="border-b ml-0 p-2 hover:scale-105 border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
+                  key={index}
+                  onClick={() => handleEmailClick(email)}
+                >
+                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
+                  <p>{email.Subject}</p>
+                </div>
+              ))}
+            {currentTab === 1 &&
+              listOfMailSpam.map((email, index) => (
+                <div
+                  className="border-b ml-0 m-2 hover:bg-gray-100 hover:border hover:shadow-2xl cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
+                  key={index}
+                  onClick={() => handleEmailClick(email)}
+                >
+                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
+                  <p>{email.Subject}</p>
+                </div>
+              ))}
+            {currentTab === 2 &&
+              listOfMailImportant.map((email, index) => (
+                <div
+                  className="border-b ml-0 m-2 hover:bg-gray-100 hover:border hover:shadow-2xl cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
+                  key={index}
+                  onClick={() => handleEmailClick(email)}
+                >
+                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
+                  <p>{email.Subject}</p>
+                </div>
+              ))}
+            </div>
         </div>
       </div>
     </div>
