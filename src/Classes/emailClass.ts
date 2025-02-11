@@ -27,7 +27,6 @@ class Email {
         
       }
       else{
-        console.log('Response Was Okay')
         this.Subject = 'Response Worked'
       }
 
@@ -56,7 +55,6 @@ class Email {
             isInHeaders = false;
             isInBody = true;
           }
-          console.log('isinHeaders='+isInHeaders,' isInBody='+isInBody)
         }
 
         // Body processing based on the boundary and content type
@@ -82,7 +80,6 @@ class Email {
       if (currentBody && contentType === 'text/html') {
         this.Body = currentBody.trim();
       }
-      console.log("current Body Trim iS \n" + currentBody.trim)
     } catch (error) {
       console.error("Error while fetching or parsing the email:", error);
     }

@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import mailIcon from "../assets/email.svg";
 import sendIcon from "../assets/send.svg";
 import spamIcon from "../assets/spam.svg";
 import importantIcon from "../assets/important.svg";
+import logoutIcon from "../assets/logout.svg";
+import axios from "axios";
 
 const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number; open: string }> = ({ onTabChange, currentTab, open }) => {
     const [hoveredTab, setHoveredTab] = useState<number | null>(null);
     const [isMinimized, setIsMinimized] = useState(true);
+    const navigate = useNavigate();
 
     const toggleIcon = isMinimized
         ? "https://cdn-icons-png.flaticon.com/512/130/130884.png" // Expand icon
@@ -48,7 +51,13 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
             )}
         </button>
     );
-
+    function logOut(){
+        console.log("logged out");
+        axios.post('http://127.0.0.1:3000/logout').then((response) => {
+              console.log("not Logged In");
+              navigate("/");
+          })
+    }
     return (
         <div
             className="h-full bg-gray-200 transition-all w-auto flex flex-col items-start relative"
@@ -89,6 +98,27 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                     </p>
                 )}
             </Link>
+            <button
+                className={`p-4 flex w-full mb-4 items-center  transition-all ${
+                    isTabHovered(4) ? "bg-gray-300" : "hover:bg-gray-300"
+                }`}
+                onClick={logOut}>
+                <img className="h-[1.5rem]" src={logoutIcon} alt="Send Icon" />
+                    {!isMinimized && (
+                        <p
+                            className="ml-2 overflow-hidden transition-all duration-300 ease-in-out"
+                            
+                            style={{
+                                visibility: isTabHovered(4) ? "visible" : "hidden",
+                                opacity: isTabHovered(4) ? "1" : "0",
+                                width: "auto",
+                                fontSize: isTabHovered(4)? "0.75rem" : '0'
+                            }}
+                        >
+                            Send
+                        </p>
+                    )}
+            </button>
 
             {/* Invisible Spacer for Consistent Width */}
             <div

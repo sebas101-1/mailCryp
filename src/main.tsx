@@ -8,6 +8,7 @@ import EmailRead from "./Routes/EmailRead"
 import NotFound from "./Routes/NotFound"
 import Send from "./Routes/Send";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Info from "./Routes/Info";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "Send",
     element: <Send/>
+  },
+  {
+    path: "Info",
+    element: <Info/>
   }
 ]);
 

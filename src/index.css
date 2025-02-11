@@ -76,23 +76,6 @@ input:focus {
     background-position: 0 0, 21px 21px;
     background-size: 42px 42px;
 }
-.elCreate{
-    background:
-    radial-gradient(50% 50% at 100% 0,#ffffff 0%  5% ,#3b82f0 6%  15%,#ffffff 16% 25%,#3b82f0 26% 35%,#ffffff 36% 45%,
-     #3b82f0 46% 55%,#ffffff 56% 65%,#3b82f0 66% 75%,#ffffff 76% 85%,#3b82f0 86% 95%,
-     #0000 96%),
-    radial-gradient(50% 50% at 0 100%,#ffffff 0%  5% ,#3b82f0 6%  15%,#ffffff 16% 25%,#3b82f0 26% 35%,#ffffff 36% 45%,
-     #3b82f0 46% 55%,#ffffff 56% 65%,#3b82f0 66% 75%,#ffffff 76% 85%,#3b82f0 86% 95%,
-     #0000 96%),
-    radial-gradient(50% 50%,#ffffff 0%  5% ,#3b82f0 6%  15%,#ffffff 16% 25%,#3b82f0 26% 35%,#ffffff 36% 45%,
-     #3b82f0 46% 55%,#ffffff 56% 65%,#3b82f0 66% 75%,#ffffff 76% 85%,#3b82f0 86% 95%,
-     #0000 96%),
-    radial-gradient(50% 50%,#ffffff 0%  5% ,#3b82f0 6%  15%,#ffffff 16% 25%,#3b82f0 26% 35%,#ffffff 36% 45%,
-     #3b82f0 46% 55%,#ffffff 56% 65%,#3b82f0 66% 75%,#ffffff 76% 85%,#3b82f0 86% 95%,
-     #0000 96%) 44px 44px;
-background-size: 88px 88px;
-background-color: #ffffff;
-}
 .elSend{
     background: 
       linear-gradient(135deg,#0000 20.5%,#ffffff 0 29.5%,#0000 0) 0 9.5px,

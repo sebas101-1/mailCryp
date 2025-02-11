@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Email from "../Classes/emailClass";
 import Sidebar from '../hero/Sidebar';
+import axios from 'axios';
+
 const Home: React.FC = () => {
   const [listOfMail, setListOfMail] = useState<Email[]>([]);
   const [listOfMailSpam, setListOfMailSpam] = useState<Email[]>([]);
@@ -11,9 +13,24 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const testingFile = "../assets/Testing.eml";
+    // Check if the user is logged in
+    axios.get('http://127.0.0.1:3000/loggedIn', 
     
-    const primaryEmails = [new Email(testingFile),new Email(testingFile),new Email(testingFile)];
+    {headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log("User is logged in:", response.data);
+    })
+    .catch(error => {
+      console.log("User not logged in, redirecting..." + error);
+    });
+
+
+    const testingFile = "../assets/Testing.eml";
+    const primaryEmails = [new Email(testingFile), new Email(testingFile), new Email(testingFile)];
     const spamEmails: Email[] = [];
     const importantEmails: Email[] = [];
 
@@ -30,7 +47,7 @@ const Home: React.FC = () => {
       .catch((err) => {
         console.error("Failed to set up emails", err);
       });
-  }, []);
+  }, [navigate]); // 👈 Added `navigate` to avoid stale closures
 
   const tabUnderline = (tab: number) => setCurrentTab(tab);
 
@@ -50,7 +67,7 @@ const Home: React.FC = () => {
             {currentTab === 0 &&
               listOfMail.map((email, index) => (
                 <div
-                  className="border-b ml-0 p-2 hover:scale-105 border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
+                  className="border-b ml-0 p-2 hover:scale-[1.02] border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
                   key={index}
                   onClick={() => handleEmailClick(email)}
                 >
