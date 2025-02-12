@@ -14,18 +14,21 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Check if the user is logged in
-    axios.get('http://127.0.0.1:3000/loggedIn', 
-    
-    {headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      withCredentials: true
-    })
+    axios.defaults.withCredentials = true;
+
+  // Check login status
+  axios.get('http://localhost:3000/loggedIn')
     .then(response => {
       console.log("User is logged in:", response.data);
     })
     .catch(error => {
-      console.log("User not logged in, redirecting..." + error);
+      if (error.response && error.response.status === 401) {
+        console.log("User not logged in, redirecting...");
+        // Handle redirection here
+        navigate("/")
+      } else {
+        console.error("Error checking login status:", error);
+      }
     });
 
 
