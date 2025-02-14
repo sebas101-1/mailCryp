@@ -28,6 +28,7 @@ const Home: React.FC = () => {
         navigate("/")
       } else {
         console.error("Error checking login status:", error);
+        navigate("/")
       }
     });
 

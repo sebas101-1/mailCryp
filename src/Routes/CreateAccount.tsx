@@ -66,7 +66,7 @@ function CreateAccount() {
 
   return (
     <>
-      <div className="el *:flex items-center justify-center min-h-screen">
+      <div className="el flex items-center justify-center min-h-screen">
         <div className="w-full max-w-md strong-shadow p-8 bg-white ">
           <h2 className="text-2xl font-bold mb-6  text-center text-gray-900">Create Account</h2>
           <form onSubmit={handleSubmit}>
