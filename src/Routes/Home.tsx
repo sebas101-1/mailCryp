@@ -25,10 +25,9 @@ const Home: React.FC = () => {
       if (error.response && error.response.status === 401) {
         console.log("User not logged in, redirecting...");
         // Handle redirection here
-        navigate("/")
       } else {
         console.error("Error checking login status:", error);
-        navigate("/")
+        
       }
     });
 
@@ -47,6 +46,7 @@ const Home: React.FC = () => {
         setListOfMail(primaryEmails);
         setListOfMailSpam(spamEmails);
         setListOfMailImportant(importantEmails);
+        console.log("Spam Emails: " + spamEmails);
       })
       .catch((err) => {
         console.error("Failed to set up emails", err);
@@ -58,7 +58,23 @@ const Home: React.FC = () => {
   const handleEmailClick = (email: Email) => {
     navigate(`/email/${encodeURIComponent(email.pathToEmail)}`);
   };
-
+  const renderEmails = (listMail:Email[]) => (
+    (listMail.length != 0)?
+      listMail.map((email, index) => (
+        <div
+          className="border-b ml-0 p-2 hover:scale-[1.02] border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
+          key={index}
+          onClick={() => handleEmailClick(email)}
+        >
+          <p className="ml-8 font-bold mr-8">{email.Sender}</p>
+          <p>{email.Subject}</p>
+        </div>
+      ))
+    :
+    <div className='p-10'>
+      <p>No Mail (～￣▽￣)～</p>
+    </div>
+  )
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
@@ -69,38 +85,14 @@ const Home: React.FC = () => {
         <div className="flex-grow overflow-auto p-8">
           <div className='bg-gray-100 border shadow-2xl border-gray-300'>
             {currentTab === 0 &&
-              listOfMail.map((email, index) => (
-                <div
-                  className="border-b ml-0 p-2 hover:scale-[1.02] border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
-                  key={index}
-                  onClick={() => handleEmailClick(email)}
-                >
-                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                  <p>{email.Subject}</p>
-                </div>
-              ))}
+              renderEmails(listOfMail)
+            }
             {currentTab === 1 &&
-              listOfMailSpam.map((email, index) => (
-                <div
-                  className="border-b ml-0 m-2 hover:bg-gray-100 hover:border hover:shadow-2xl cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
-                  key={index}
-                  onClick={() => handleEmailClick(email)}
-                >
-                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                  <p>{email.Subject}</p>
-                </div>
-              ))}
-            {currentTab === 2 &&
-              listOfMailImportant.map((email, index) => (
-                <div
-                  className="border-b ml-0 m-2 hover:bg-gray-100 hover:border hover:shadow-2xl cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-300"
-                  key={index}
-                  onClick={() => handleEmailClick(email)}
-                >
-                  <p className="ml-8 font-bold mr-8">{email.Sender}</p>
-                  <p>{email.Subject}</p>
-                </div>
-              ))}
+              renderEmails(listOfMailSpam)
+            }
+            {currentTab === 2 && 
+              renderEmails(listOfMailImportant)
+            }
             </div>
         </div>
       </div>

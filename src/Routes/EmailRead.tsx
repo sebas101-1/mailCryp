@@ -36,7 +36,7 @@ export default function EmailRead() {
   }, [emailPath]);
 
   return (
-    <div className='elSend flex justify-center overflow-scroll items-center h-[100vh]'>
+    <div className='elRecive flex justify-center overflow-scroll items-center h-[100vh]'>
 
       <div className='bg-white strong-shadow transition shadow-2xl h-[90vh] overflow-auto w-[90vw] '>
         <Link to={'/home'}>

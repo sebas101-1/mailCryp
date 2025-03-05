@@ -2,10 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, {useState } from 'react';
 import mailIcon from '../assets/email.svg'
+import showIcon from '../assets/show.svg'
 function CreateAccount() {
   const [error, setError] = useState('Welcome Back✉️');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({username: "",password: ""});
+  const [showPassword, setShowPassword] = useState("password");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
@@ -61,16 +63,20 @@ function CreateAccount() {
                 autoFocus
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <div className="transition flex mb-1 mt-1 p-2 items-center scrolling-gradient-border w-full border border-gray-500 ">
+              
               <input
-                type="password"
+                type={showPassword}
                 id="password"
-                className="mt-1 p-2 scrolling-gradient-border w-full border border-gray-500"
+                className=""
                 required
                 onChange={handleChange}
                 value={formData.password}
               />
+              <button className=' hover:scale-105 transition-all' onMouseDown={() => {setShowPassword("text")}} onMouseUp={() => {setShowPassword("password")}}>
+                <img className=' h-[1.2rem] ml-[9rem] right-auto'  src={showIcon}/>
+              </button>
             </div>
             <button
               type="submit"

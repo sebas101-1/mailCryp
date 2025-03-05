@@ -15,45 +15,35 @@ export default function Send() {
   };
   
   return (
-    <div className="gradiantBg flex overflow-hidden justify-center items-center h-[100vh]">
-      <div className="bg-gray-200 shadow-2xl h-full w-[90vw] rounded-md">
+    <div className="elSend flex overflow-hidden justify-center items-center h-[100vh]">
+      <div className="bg-white strong-shadow transition shadow-2xl h-auto overflow-auto w-[90vw]">
         {/* Back button */}
-        <Link to="/home">
-          <img
-            className="h-[2rem] transition-all hover:bg-gray-300 m-2 rounded-full border-2 p-2"
-            src={back}
-            alt="Back"
-          />
+        <Link to={'/home'}>
+          <img className='h-[2rem] transition-all hover:bg-gray-100  m-2 rounded-full p-2' src={back}/>
         </Link>
 
         {/* Subject */}
         <div className="flex">
           <input
-            className="w-full text-2xl border-b-2 border-gray-300 p-8 text-center bg-gray-200 focus:outline-none"
+            className="w-auto ml-8 text-2xl border-b-2 border-gray-300 p-2 focus:outline-none"
             placeholder="Subject"
           />
         </div>
 
         {/* Recipient Fields */}
         <div className="mt-4">
-          <div className="flex w-full text-lg border-gray-300 border-b-2 p-4 text-center bg-gray-200">
-            <p className="mr-2">To:</p>
             <input
-              className="bg-gray-200 w-full focus:outline-none"
+              className="w-auto ml-8 text-large border-b-2 border-gray-300 p-2 focus:outline-none"
               placeholder="Recipient's email"
             />
-          </div>
-          <div className="flex w-full text-lg border-b-2 border-gray-300 p-4 text-center bg-gray-200">
-            <p className="mr-2">CC:</p>
             <input
-              className="bg-gray-200 w-full focus:outline-none"
-              placeholder="Optional"
+              className="w-auto ml-8 text-large border-b-2 border-gray-300 p-2 focus:outline-none"
+              placeholder="CC: Optional"
             />
-          </div>
         </div>
 
         {/* Email Body */}
-        <div className="h-[40vh] m-8 scrolling-gradient-border bg-white rounded-lg shadow-sm overflow-hidden">
+        <div className="h-[40vh] m-8 bg-white rounded-lg shadow-sm overflow-hidden">
           <ReactQuill
             theme="snow"
             value={body}
