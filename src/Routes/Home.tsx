@@ -62,7 +62,7 @@ const Home: React.FC = () => {
     (listMail.length != 0)?
       listMail.map((email, index) => (
         <div
-          className="border-b ml-0 p-2 hover:scale-[1.02] border-2 hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer pb-8 text-center flex transition-all w-full h-8 border-gray-100"
+          className="border-b ml-0 p-1 sm:p-2 hover:scale-[1.02] border-2 border-black sm:hover:border-black  hover:border-2 shadow-2xl bg-gray-100 cursor-pointer sm:pb-8 text-center flex transition-all w-full smw-full sm:h-4 lg:h-8 sm:border-gray-100"
           key={index}
           onClick={() => handleEmailClick(email)}
         >
@@ -82,8 +82,8 @@ const Home: React.FC = () => {
 
       {/* Main Content */}
       <div className="w-full homeBg shadow-2xl h-full flex flex-col">
-        <div className="flex-grow overflow-auto p-8">
-          <div className='bg-gray-100 border shadow-2xl border-gray-300'>
+        <div className="flex-grow overflow-auto p-6 sm:p-8">
+          <div className='bg-gray-100 floatIn border w-full shadow-2xl border-gray-300'>
             {currentTab === 0 &&
               renderEmails(listOfMail)
             }

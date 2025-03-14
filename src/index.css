@@ -122,7 +122,11 @@ input:focus {
     overflow-y: auto; /* Handles scrolling if content overflows */
 }
   
-  
+.floatIn{
+    animation: floatIn 0.6s ease-out;
+    z-index: 999;
+    overflow-x: visible;
+}
   /* Gradient scrolling animation */
 @keyframes scroll-gradient {
     0% {
@@ -132,7 +136,14 @@ input:focus {
         border-image-source: linear-gradient(450deg, #ff0000, #00ff00, #0000ff, #ff0000);
     }
 }
-  
+@keyframes floatIn{
+    0% {
+        transform: scale(2);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
 @keyframes scroll {
     0% {
         transform: translateX(0%);

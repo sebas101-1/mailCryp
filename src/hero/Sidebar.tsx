@@ -35,15 +35,15 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
             }`}
             style={{ width: "100%" }}
         >
-            <img className="h-[1.5rem]" src={icon} alt={`${label} Icon`} />
+            <img className="sm:h-[1.5rem] h-[1rem]" src={icon} alt={`${label} Icon`} />
             {!isMinimized && (
                 <p
-                    className={`ml-2 overflow-hidden transition-all duration-300 ease-in-out`}
+                    className={`ml-2 transition-all duration-300 ease-in-out`}
                     style={{
                         visibility: isTabHovered(id) ? "visible" : "hidden",
                         opacity: isTabHovered(id) ? "1" : "0",
                         width: "auto",
-                        fontSize: isTabHovered(id) ?  "0.75rem" : "0",
+                        fontSize: isTabHovered(id) ?  "1rem" : "0",
                     }}
                 >
                     {label}
@@ -66,7 +66,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
             {/* Toggle Minimize Button */}
             <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="mb-4 p-2 self-end hover:scale-150 transition-all"
+                className="p-4 self-center hidden sm:inline hover:scale-150 transition-all"
             >
                 <img className="h-[0.8rem]" src={toggleIcon} alt="Toggle Sidebar" />
             </button>
@@ -79,7 +79,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                 to="/send"
                 onMouseEnter={() => setHoveredTab(3)}
                 onMouseLeave={() => setHoveredTab(null)}
-                className={`p-4 flex w-full mb-4 items-center  transition-all ${
+                className={`p-4 flex w-full items-center  transition-all ${
                     isTabHovered(3) ? "bg-gray-300" : "hover:bg-gray-300"
                 }`}
             >
@@ -91,7 +91,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                             visibility: isTabHovered(3) ? "visible" : "hidden",
                             opacity: isTabHovered(3) ? "1" : "0",
                             width: "auto",
-                            fontSize: isTabHovered(3)? "0.75rem" : '0'
+                            fontSize: isTabHovered(3)? "1rem" : '0'
                         }}
                     >
                         Send
@@ -99,44 +99,46 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
                 )}
             </Link>
             <button
-                className={`p-4 flex w-full mb-4 items-center  transition-all ${
+                onMouseEnter={() => setHoveredTab(4)}
+                onMouseLeave={() => setHoveredTab(null)}
+                className={`p-4 flex w-full items-center  transition-all ${
                     isTabHovered(4) ? "bg-gray-300" : "hover:bg-gray-300"
                 }`}
                 onClick={logOut}>
-                <img className="h-[1.5rem]" src={logoutIcon} alt="Send Icon" />
+                <img className="h-[1.5rem]" src={logoutIcon} alt="Log Out" />
                     {!isMinimized && (
                         <p
-                            className="ml-2 overflow-hidden transition-all duration-300 ease-in-out"
+                            className="ml-2 overflow-visible transition-all duration-300 ease-in-out"
                             
                             style={{
                                 visibility: isTabHovered(4) ? "visible" : "hidden",
                                 opacity: isTabHovered(4) ? "1" : "0",
                                 width: "auto",
-                                fontSize: isTabHovered(4)? "0.75rem" : '0'
+                                fontSize: isTabHovered(4)? "1rem" : '0'
                             }}
                         >
-                            Send
+                            Log Out
                         </p>
                     )}
             </button>
 
             {/* Invisible Spacer for Consistent Width */}
             <div
-                className={`p-4 invisible flex mb-4 items-center w-full transition-all`}
-            >
-                <img className="h-[1.5rem]" src={importantIcon} alt="Send Icon" />
-                {!isMinimized && (
-                    <p
-                        className="ml-2 overflow-hidden ease-in-out"
-                        style={{    
-                            width: "auto",
-                            fontSize: "0.75rem",
-                        }}
-                    >
-                        Important
-                    </p>
-                )}
-            </div>
+            className={`p-4  flex invisible items-center w-full  transition-all`}
+            style={{ width: "100%" }}
+        >
+            <img className="sm:h-[1.5rem] h-[1rem]" src={importantIcon} alt={`${importantIcon} Icon`} />
+            {!isMinimized && (
+                <p
+                    className={`ml-2 w-[110%]  transition-all duration-300 ease-in-out`}
+                    style={{
+                        fontSize: "1rem",
+                    }}
+                >
+                    {"Importantttt"}
+                </p>
+            )}
+        </div>
         </div>
     );
 };

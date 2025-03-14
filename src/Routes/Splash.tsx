@@ -48,11 +48,11 @@ function CreateAccount() {
   return (
     <>
       <div className="el flex  min-h-screen">
-        <div className="w-full max-w-md p-8 items-center justify-center bg-white shadow-lg">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-900">Welcome</h2>
+        <div className="w-full max-w-md p-8 items-center justify-center sm:bg-white shadow-lg">
+          <h2 className="text-2xl font-bold lg:mb-6 text-center text-gray-900">Welcome</h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Username</label>
+              <label htmlFor="email" className="block lg:text-sm sm:text-2xl font-bold md:font-medium text-black sm:text-gray-700">Username</label>
               <input
                 type="text"
                 id="username"
@@ -63,19 +63,19 @@ function CreateAccount() {
                 autoFocus
               />
             </div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
-            <div className="transition flex mb-1 mt-1 p-2 items-center scrolling-gradient-border w-full border border-gray-500 ">
+            <label htmlFor="password" className="block lg:text-sm sm:text-2xl font-bold md:font-medium text-black sm:text-gray-700">Password</label>
+            <div className="transition bg-white flex mb-1 mt-1 p-2 items-center scrolling-gradient-border w-full border border-gray-500 ">
               
               <input
                 type={showPassword}
                 id="password"
-                className=""
+                className="w-full h-full bg-opacity-0"
                 required
                 onChange={handleChange}
                 value={formData.password}
               />
               <button className=' hover:scale-105 transition-all' onMouseDown={() => {setShowPassword("text")}} onMouseUp={() => {setShowPassword("password")}}>
-                <img className=' h-[1.2rem] ml-[9rem] right-auto'  src={showIcon}/>
+                <img className=' h-[1.2rem] md:ml-[0rem] ml-[0rem] right-auto'  src={showIcon}/>
               </button>
             </div>
             <button
