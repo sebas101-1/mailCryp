@@ -9,7 +9,6 @@ const Home: React.FC = () => {
   const [listOfMailSpam, setListOfMailSpam] = useState<Email[]>([]);
   const [listOfMailImportant, setListOfMailImportant] = useState<Email[]>([]);
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const [sidebarOpen, setSidebar] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,7 +77,7 @@ const Home: React.FC = () => {
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <Sidebar onTabChange={tabUnderline} currentTab={currentTab} open={sidebarOpen} />
+      <Sidebar onTabChange={tabUnderline} currentTab={currentTab}/>
 
       {/* Main Content */}
       <div className="w-full homeBg shadow-2xl h-full flex flex-col">

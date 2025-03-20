@@ -7,7 +7,7 @@ import importantIcon from "../assets/important.svg";
 import logoutIcon from "../assets/logout.svg";
 import axios from "axios";
 
-const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number; open: string }> = ({ onTabChange, currentTab, open }) => {
+const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number}> = ({ onTabChange, currentTab}) => {
     const [hoveredTab, setHoveredTab] = useState<number | null>(null);
     const [isMinimized, setIsMinimized] = useState(true);
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Sidebar: React.FC<{ onTabChange: (tab: number) => void; currentTab: number
     );
     function logOut(){
         console.log("logged out");
-        axios.post('http://127.0.0.1:3000/logout').then((response) => {
+        axios.post('http://127.0.0.1:3000/logout').then(() => {
               console.log("not Logged In");
               navigate("/");
           })

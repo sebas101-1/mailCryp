@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import Email from "../Classes/emailClass"; // Assuming you have this class for parsing
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill CSS
-import star from '../assets/star.svg'
 export default function EmailRead() {
   // Expect emailPath to be a string from useParams
   const { emailPath } = useParams<{ emailPath: string }>(); 

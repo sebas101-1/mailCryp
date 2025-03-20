@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/vite-env.d.ts","./src/classes/emailclass.ts","./src/routes/createaccount.tsx","./src/routes/emailread.tsx","./src/routes/home.tsx","./src/routes/info.tsx","./src/routes/notfound.tsx","./src/routes/send.tsx","./src/routes/splash.tsx","./src/hero/sidebar.tsx","./src/types/emailjs-mime-parser.d.ts"],"version":"5.6.2"}
