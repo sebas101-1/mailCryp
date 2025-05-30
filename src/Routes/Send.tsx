@@ -1,18 +1,60 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import Quill CSS
-
+import axios from 'axios';
+  interface Email {
+    to: string;
+    subject: string;
+    text: string;
+    textashtml: string; 
+    attatchment: File; // Attachment file
+  }
 export default function Send() {
   const back = 'https://cdn-icons-png.flaticon.com/512/130/130882.png';
   const [body, setBody] = useState(''); // State for the email body
   const [attachedFile, setAttachedFile] = useState<File | null>(null);
-
+  const[error, setError] = useState<string>('');
+  const navigate = useNavigate();
+  const [finalEmail, setFinalEmail] = useState<Email>({
+    to: '',
+    subject: '',
+    text: '',
+    textashtml: '',
+    attatchment: new File([], 'default.txt') // Default empty file
+  });
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      setAttachedFile(event.target.files[0]);
+      setFinalEmail(prev => ({ ...prev, attatchment: event.target.files![0] }));
     }
   };
+
+  function sendMail() {
+    axios
+      .post('http://localhost:3000/sendEmail', 
+        {email: finalEmail,
+        },
+        {headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }}
+      )
+      .then((response) =>{
+
+      // Optionally clear the form inputs
+        console.log(response)
+        if(response.data.success){
+          navigate('/home');
+        }  
+        else{
+          setError(response.data.message);
+        }
+        
+      })
+      .catch((error) => {
+        console.error('Email Failed To Send', error);  
+        setError("Email Failed To Send");
+      });
+  }
   
   return (
     <div className="elSend flex overflow-hidden justify-center items-center h-[100vh]">
@@ -27,6 +69,11 @@ export default function Send() {
           <input
             className="w-auto ml-8 text-2xl border-b-2 border-gray-300 p-2 focus:outline-none"
             placeholder="Subject"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event && event.target) {
+                setFinalEmail(prev => ({ ...prev, subject: event.target.value }));
+              }
+            }}
           />
         </div>
 
@@ -35,6 +82,11 @@ export default function Send() {
             <input
               className="w-auto ml-8 text-large border-b-2 border-gray-300 p-2 focus:outline-none"
               placeholder="Recipient's email"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event && event.target) {
+                setFinalEmail(prev => ({ ...prev, to: event.target.value }));
+              }
+            }}
             />
             <input
               className="w-auto ml-8 text-large border-b-2 border-gray-300 p-2 focus:outline-none"
@@ -47,15 +99,19 @@ export default function Send() {
           <ReactQuill
             theme="snow"
             value={body}
-            onChange={setBody}
+            onChange={(value: string) => {
+              setBody(value);
+              setFinalEmail(prev => ({ ...prev, text: value, textashtml: value }));
+            }}
             className="h-full"
           />
         </div>
+        <p>{error}</p>
 
         {/* Action Buttons */}
         <div className="flex justify-start m-4 items-center">
           <button
-            onClick={() => console.log({ body, attachedFile })}
+            onClick={() => sendMail()}
             className="bg-blue-500 rounded-r-none text-white text-sm px-4 py-2 rounded-full hover:shadow-2xl shadow hover:bg-blue-600 border-gray-300 border-r-2 transition"
           >
             Send
