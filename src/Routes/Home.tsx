@@ -33,20 +33,30 @@ const Home: React.FC = () => {
         
         // Fetch emails
         const response = await axios.get('http://localhost:3000/getEmails');
-        console.log("Emails fetched successfully:", response.data);
+        // console.log("Emails fetched successfully:", response.data);
         
         // Process emails
         let emails: Email[] = [];
-        console.log("email:", response.data.emails.length);
+        console.log("email:", response.data.emails[1].length);
         for (let message = 0; message < response.data.emails.length; message++) {
-          emails.push({
-            messageId: response.data.emails[message].messageId,
-            from: response.data.emails[message].from.text,
-            subject: response.data.emails[message].subject,
-            date: new Date(response.data.emails[message].date),
-            text: response.data.emails[message].text,
-            textashtml: response.data.emails[message].textAsHtml
-          })
+          if( response.data.emails[message].from != undefined) {
+            emails.push({
+              messageId: response.data.emails[message].messageId,
+              from: response.data.emails[message].from.text,
+              subject: response.data.emails[message].subject,
+              date: new Date(response.data.emails[message].date),
+              text: response.data.emails[message].text,
+              textashtml: response.data.emails[message].textAsHtml
+            })
+          } else {
+            emails.push({
+              messageId: response.data.emails[message].messageId,
+              from: "idk",
+              subject: response.data.emails[message].subject,
+              date: new Date(response.data.emails[message].date),
+              text: response.data.emails[message].text,
+              textashtml: response.data.emails[message].textAsHtml
+            })
         }
         console.log("Processed emails:", emails);
         console.log("Email From:", emails[0].from);
@@ -60,7 +70,7 @@ const Home: React.FC = () => {
         
         setListOfMail(emails);
         setIsLoading(false);
-      } catch (error: any) {
+      }} catch (error: any) {
         if (error.response?.status === 401) {
           console.log("User not logged in, redirecting...");
           navigate('/');

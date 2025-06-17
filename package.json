@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/he": "^1.2.3",
     "axios": "^1.7.7",
+    "dompurify": "^3.2.6",
     "emailjs-mime-parser": "^2.0.7",
     "eml-parser": "^2.0.3",
+    "he": "^1.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-quill": "^2.0.0",

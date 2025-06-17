@@ -6,7 +6,6 @@ import axios from 'axios';
   interface Email {
     to: string;
     subject: string;
-    text: string;
     textashtml: string; 
     attatchment: File; // Attachment file
   }
@@ -19,7 +18,6 @@ export default function Send() {
   const [finalEmail, setFinalEmail] = useState<Email>({
     to: '',
     subject: '',
-    text: '',
     textashtml: '',
     attatchment: new File([], 'default.txt') // Default empty file
   });
@@ -30,6 +28,7 @@ export default function Send() {
   };
 
   function sendMail() {
+    console.log("Sending Email", finalEmail);
     axios
       .post('http://localhost:3000/sendEmail', 
         {email: finalEmail,
@@ -43,7 +42,8 @@ export default function Send() {
       // Optionally clear the form inputs
         console.log(response)
         if(response.data.success){
-          navigate('/home');
+          // navigate('/home');
+          setError(response.data.message);
         }  
         else{
           setError(response.data.message);
@@ -51,8 +51,7 @@ export default function Send() {
         
       })
       .catch((error) => {
-        console.error('Email Failed To Send', error);  
-        setError("Email Failed To Send");
+        console.error('Email Failed To Send', error);
       });
   }
   
@@ -101,7 +100,7 @@ export default function Send() {
             value={body}
             onChange={(value: string) => {
               setBody(value);
-              setFinalEmail(prev => ({ ...prev, text: value, textashtml: value }));
+              setFinalEmail(prev => ({ ...prev, textashtml: value }));
             }}
             className="h-full"
           />

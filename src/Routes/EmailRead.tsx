@@ -3,6 +3,8 @@ import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import DOMPurify from 'dompurify'; // Add this import at the top
+import he from 'he'; // Add this import at the top
 
 interface Email {
   messageId: string;
@@ -10,7 +12,7 @@ interface Email {
   subject: string;
   date: Date;
   text: string;
-  textAsHtml: string; // Corrected property name
+  textashtml: string; // Corrected property name
 }
 
 export default function EmailRead() {
@@ -33,6 +35,7 @@ export default function EmailRead() {
         if (location.state?.email) {
           setEmail(location.state.email);
           setIsLoading(false);
+          console.log('Email loaded from location state:', location.state.email);
           return;
         }
       } catch (error) {
@@ -134,13 +137,18 @@ export default function EmailRead() {
           <div className={`border shadow-md rounded-md bg-white m-8 mb-0 p-4 border-gray-300 ${reply ? "border-b-0 rounded-b-none" : ""}`}>
             {isLoading ? (
               <p>Loading email content...</p>
-            ) : email?.textAsHtml ? (
-              <div dangerouslySetInnerHTML={{ __html: email.textAsHtml }} /> 
-            ) : email?.text ? (
-              <div className="whitespace-pre-wrap">{email.text}</div>
             ) : (
-              <p>No email content available.</p>
+              email?.textashtml ? (
+                <div 
+                  dangerouslySetInnerHTML={{ 
+                    __html: DOMPurify.sanitize(he.decode(email.textashtml))
+                  }} 
+                />
+              ) : (
+                <p>Email Contents Not Found.</p>
+              )
             )}
+            
           </div>   
           
           {reply && (

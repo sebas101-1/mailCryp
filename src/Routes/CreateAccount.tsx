@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, {useState } from 'react';
 
 function CreateAccount() {
-  const [error, setError] = useState('Welcome To MailCryp✉️');
+  const [error, setError] = useState('Welcome To Mailcryp✉️');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({username: "",password: "",retypePassword:"",bDay:""});
   const [passwordLength, setPasswordLength] = useState(0);
@@ -82,7 +82,7 @@ function CreateAccount() {
                   onChange={handleChange}
                   value={formData.username}
                 />
-                <p className=' ml-auto justify-end'>@MailCryp.com</p>
+                <p className=' ml-auto justify-end'>@Mailcryp.win</p>
               </div>
             </div>
             <div className="">
